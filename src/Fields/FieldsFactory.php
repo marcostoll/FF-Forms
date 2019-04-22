@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace FF\Forms\Fields;
 
 use FF\Services\AbstractFactory;
-use FF\Utilities\ClassUtils;
 
 /**
  * Class FieldsFactory
@@ -25,7 +24,8 @@ class FieldsFactory extends AbstractFactory
      */
     public function __construct()
     {
-        $this->prependNamespaces(ClassUtils::normalizeNamespace(__NAMESPACE__));
+        parent::__construct();
+        $this->prependNamespaces(__NAMESPACE__);
     }
 
     /**
