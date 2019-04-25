@@ -1,6 +1,6 @@
 {
   "name": "fastforward/forms",
-  "description": "A component providing validation and configuration logic - part of the Fast Forward Components Collection",
+  "description": "A component providing form validation and configuration logic - part of the Fast Forward Components Collection",
   "type": "library",
   "license": "proprietary",
   "minimum-stability": "stable",
