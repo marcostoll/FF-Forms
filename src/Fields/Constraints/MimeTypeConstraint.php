@@ -38,9 +38,9 @@ class MimeTypeConstraint extends AbstractConstraint
      * - a super mime type, e.g. 'image'
      * The validation will be case-sensitive.
      *
-     * @param string[] $acceptedTypes
+     * @param string ...$acceptedTypes
      */
-    public function __construct(array $acceptedTypes)
+    public function __construct(...$acceptedTypes)
     {
         $this->setAcceptedTypes($acceptedTypes);
     }

@@ -34,7 +34,7 @@ class MimeTypeConstraintTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->uut = new MimeTypeConstraint([]);
+        $this->uut = new MimeTypeConstraint();
     }
 
     /**
