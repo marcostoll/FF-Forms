@@ -28,6 +28,7 @@ use FF\Utilities\Factories\Exceptions\ClassNotFoundException;
  * @method $this filter(int $filter, mixed $options = null)
  * @method $this honeyPot()
  * @method $this int(int $minValue = null, int $maxValue = null, int $flags = null)
+ * @method $this matches(AbstractField $matchingField)
  * @method $this maxLength(int $maxLength)
  * @method $this mimeType(string[] $acceptedTypes)
  * @method $this minLength(int $minLength)
