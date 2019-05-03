@@ -15,7 +15,6 @@
   "require": {
     "php": ">=7.2",
     "fastforward/data-structures": "dev-master",
-    "fastforward/services": "dev-master",
     "fastforward/utilities": "dev-master"
   },
   "require-dev": {
@@ -25,10 +24,6 @@
     {
       "type": "vcs",
       "url": "https://github.com/marcostoll/FF-DataStructures"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/marcostoll/FF-Services"
     },
     {
       "type": "vcs",

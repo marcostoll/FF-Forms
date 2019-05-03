@@ -21,7 +21,7 @@ use FF\Forms\Fields\PasswordField;
 use FF\Forms\Fields\RadioField;
 use FF\Forms\Fields\SelectField;
 use FF\Forms\Fields\TextField;
-use FF\Services\Exceptions\ClassNotFoundException;
+use FF\Utilities\Factories\Exceptions\ClassNotFoundException;
 
 /**
  * Class Form

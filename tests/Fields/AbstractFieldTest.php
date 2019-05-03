@@ -244,7 +244,7 @@ class AbstractFieldTest extends TestCase
     {
         $this->expectException(Error::class);
 
-       $this->uut->foo();
+        $this->uut->foo();
     }
 }
 

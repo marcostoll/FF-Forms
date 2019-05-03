@@ -16,7 +16,7 @@ use FF\Forms\Fields\Constraints\RequiredConstraint;
 use FF\Forms\Fields\Constraints\Violations\AbstractViolation;
 use FF\Forms\Fields\Constraints\Violations\InvalidValueViolation;
 use FF\Forms\Fields\Values\AbstractValue;
-use FF\Services\Exceptions\ClassNotFoundException;
+use FF\Utilities\Factories\Exceptions\ClassNotFoundException;
 
 /**
  * Class AbstractField

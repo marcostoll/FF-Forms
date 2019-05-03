@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields\Constraints;
 
-use FF\Services\AbstractFactory;
+use FF\Utilities\Factories\AbstractFactory;
 
 /**
  * Class ConstraintsFactory
@@ -24,7 +24,6 @@ class ConstraintsFactory extends AbstractFactory
      */
     public function __construct()
     {
-        parent::__construct();
         $this->prependNamespaces(__NAMESPACE__);
     }
 
