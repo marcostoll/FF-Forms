@@ -13,7 +13,6 @@ namespace FF\Forms\Fields;
 use FF\Forms\Fields\Constraints\UploadedFileConstraint;
 use FF\Forms\Fields\Values\AbstractValue;
 use FF\Forms\Fields\Values\UploadValue;
-use FF\Forms\Fields\Values\UploadValueStructure;
 
 /**
  * Class FileField
