@@ -20,10 +20,10 @@ tasks.
 
 # Introduction
 FF\Forms addresses three common needs:
-1. Defining form value constraints
-   What are my required fields?
-   Which rules must be respected for specific fields values?
-2. Validating Post data
+1. Defining form value constraints  
+   What are my required fields?  
+   Which rules must be respected for specific field values?
+2. Validating form data
 3. Checking the form's overall state and the states of the form's fields
 
 ## What FF\Forms is not
