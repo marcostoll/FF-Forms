@@ -56,8 +56,8 @@ No constraint was added to the checkbox field 'mail_to_me'. But its field type (
 bool constraint restricting its accepted values to generic boolean post expression ('1', 'on', 'yes', and 'true' 
 meaning true / '0', 'off', 'no', 'false', and '' meaning false).
 
-**Beware**: If you add multiple constraints to a single field, any given data will checked against this constraints in
-the given order. As soon as the first constraint detects a violation, the field validation is stopped.
+**Beware**: If you add multiple constraints to a single field, any given data will be checked against this constraints 
+in the given order. As soon as the first constraint detects a violation, the field validation stops.
 Therefore in most cases a required constraint should be added first if needed followed by any other constraint.
 
 ### The User Registration Form
@@ -81,8 +81,9 @@ Therefore in most cases a required constraint should be added first if needed fo
         Form::text('username')->required()->minLength(6)->maxLength(20)->custom($myUserNameUniquenessValidator),
         $myPasswordField,
         Form::password('password_repeat')->matches($myPasswordField),
-        Form::text('name'),
         Form::select('gender', ['female', 'male', 'diverse']),
+        Form::text('name'),        
+        Form::text('email')->email(),
         Form::checkbox('terms')->required()
     );
     
@@ -96,8 +97,13 @@ reference to the original password fields. Because field instances are unaware i
 them, the matching field instance has to be created first and passed as reference to the matches constraint of the 
 second field.
 
-THe select field 'gender' has been provided with a list of valid options. Any select field (as well as any multi select 
-or radio fields) come with an automatically generated options constraint using the given list of options.
+The select field 'gender' has been provided with a list of valid options. Any select field (as well as any multi select 
+or radio field) comes with an automatically generated options constraint using the given list of options.
+
+The 'email' is not marked required but has an email pattern constraint. Any field constraint besides the required
+constraint is considered met by an empty value. In this case the email constraint of the 'email' field will not raise
+any violation if no data or an empty string was assigned to the field. THe same logic applies to the 'gender' field,
+whose option constraint will not be checked on empty values. 
 
 The 'terms' checkbox was marked as required. Therefore the form would be considered invalid if a non-true value was 
 provided for the 'checkbox' field.
@@ -112,7 +118,7 @@ provided for the 'checkbox' field.
         Form::checkbox('remember_me')
     );
     
-A generic logon form is rather simple.
+A generic logon form is rather simple.  
 **But beware** that the form itself does not authenticate the user's credentials. It solely ensures that the credentials 
 provided match every constraint for a valid logon attempt.
 
@@ -125,8 +131,8 @@ provided match every constraint for a valid logon attempt.
         Form::file('image')->required()->fileSize('10M')->mimeType('image')
     );
 
-File fields will be automatically equipped with an UploadedFileConstraint to provide the necessary checking for valid 
-file files (see <https://php.net/is_uploaded_file>).
+File fields will be automatically equipped with an uploaded file constraint to provide the necessary checking for valid 
+upload files (see <https://php.net/is_uploaded_file>).
 This particular file field instance was given some additional constraints to limit valid file uploads to 10 mb max file 
 size and to any image mime type ('image/jpeg', 'image/png', ...).
 
@@ -167,7 +173,7 @@ values using the appropriate api.
 
     use FF\Forms;
     
-    $myUploadForm = new Form (/** some fields  including a file field*/);
+    $myUploadForm = new Form (/** some fields including a file field */);
     
     // process form data
     do {
@@ -188,40 +194,42 @@ values using the appropriate api.
     } while (false);      
     
 In a file upload scenario value data is most likely split into the **$_POST** and the **$_FILES** scope. Therefore you 
-must merge the to data scopes into one before assigning the combined data to the form.  
-Besides this little extra, form processing and validating of forms having file fields do not differ form forms that do 
+must merge the two data scopes into one before assigning the combined data to the form.  
+Besides this little extra, form processing and validating of forms having file fields do not differ from forms that do 
 not.
 
 ## Examples of Checking Form and Field States
 
     use FF\Forms;
     
-    $myForm = new Form (/** some fields **/);
+    $myForm = new Form (/** some fields including one named 'my_field' **/);
     
     // ... assign value data to the form
     
     // checking the forms overall state
-    var_dump($myForm->isValid());
+    var_dump($myForm->isValid()); // bool
     
     // checking a specific field's state
-    var_dump($myForm->{'my_field'}->hasValue()); // bool, checks whether a value was assigned to the field
-    var_dump($myForm->{'my_field'}->isValid()); // bool, checks whether the field's current value meets all constraints
+    var_dump($myForm->my_field->hasValue()); // bool, checks whether a value was assigned to the field
+    var_dump($myForm->my_field->isValid()); // bool, checks whether the field's current value meets all constraints
     
     // retrieving field constraint violation information    
     var_dump($myForm->getViolations()); // collection of AbstractViolation, empty in case of a valid form data
     var_dump($myForm->hasViolation('my_field)); // bool, true if data of 'my_field' violates at least on of its constraints
+    var_dump($myForm->my_field->hasViolation(); // bool, true if data of 'my_field' violates at least on of its constraints
     var_dump($myForm->getViolation('my_field')); // AbstractViolation or null in case of a valid field
+    var_dump($myForm->my_field->getViolation()); // AbstractViolation or null in case of a valid field
     
     // inspecting a specific violation
-    if ($myForm->hasViolation('my_field)) {
-        $violation = $myForm->getViolation('my_field');
+    if ($myForm->my_field->hasViolation()) {
+        $violation = $myForm->my_field->getViolation();
         var_dump(get_class($violation)); // check the type of the violation
         var_dump($violation->getConstraint()); // AbstractConstraint, retrieve the constraint instance that detected the violation
         var_dump($violation->getValue()); // AbstractValue, retrieve the value violating the constraint 
     }
      
-You may ask the form a any of its fields for its validation state at any time. But naturally before assigning values to
-a form instance it will always be considered valid a show no constraint violations at all.
+You may ask the form or any of its fields for their validation state at any time. But naturally before assigning values 
+to a form instance it will always be considered valid a will show no constraint violations at all.
 
 ### Doing conditional Output with Twig
 
@@ -243,10 +251,14 @@ a form instance it will always be considered valid a show no constraint violatio
         </div>
     </form>
     
-When showing feedback for invalid form fields, you may also inspect the concrete violation to display a suitable error
-message ('required field' vs. 'not a valid email address').    
+When showing feedback of invalid form fields, you may also inspect the concrete violation to display a suitable error
+message (e.g. 'missing value for a required field' vs. 'not a valid email address').    
 
 # Installation
+
+## via Composer
+
+## manual Installation
 
 # Basic Usage
 
