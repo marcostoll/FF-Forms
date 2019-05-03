@@ -34,7 +34,7 @@ What you can do - especially in conjunction with common templating engines - is 
 of its fields) to your view and using its api to do conditional output (e.g. rendering error messages for invalid form
 states or marking single fields as erroneous when required).
 
-## Examples for defining Forms with Constraints
+## Examples of defining Forms with Constraints
 
 ### The Contact Form
 
@@ -135,7 +135,7 @@ the server. If your form's upload fields should be limited to a specific maximum
 **MAX_FILE_SIZE** hidden field to your form's frontend. Additionally you may limit potential file uploads to a maximum 
 file size within your **php.ini** configuration (**upload_max_filesize**).
 
-## Examples for Processing and Validating Post Data
+## Examples of Processing and Validating Post Data
 
     use FF\Forms;
     
@@ -192,7 +192,7 @@ must merge the to data scopes into one before assigning the combined data to the
 Besides this little extra, form processing and validating of forms having file fields do not differ form forms that do 
 not.
 
-## Examples for Checking Form and Field States
+## Examples of Checking Form and Field States
 
     use FF\Forms;
     
