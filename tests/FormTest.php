@@ -429,7 +429,7 @@ class FormTest extends TestCase
      */
     public function testMagic()
     {
-        $myForm = new Form(
+        new Form(
             Form::text('username')->required()->minLength(6),
             Form::password('password')->required(),
             Form::radio('gender', ['male', 'female', 'other']),
