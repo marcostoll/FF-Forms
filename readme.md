@@ -18,7 +18,7 @@ together if desired. And some more complex **FF** components depend on other rat
 But you may orchestrate multiple **FF** components to build an web application skeleton that provides the most common 
 tasks.
 
-# Introduction
+# Introduction - What is FF\Forms?
 FF\Forms addresses three common needs:
 1. Defining form value constraints  
    What are my required fields?  
@@ -53,7 +53,7 @@ The 'email' field is given an email constraint which enforces its value to match
 And the 'message' field has a max length constraints that causes the field (and therefore the whole form instance) to be
 considered invalid if its value exceeds 1000 characters.
 No constraint was added to the checkbox field 'mail_to_me'. But its field type (CheckboxField) comes with a built-in 
-bool constraint restricting its accepted values to generic boolean post expression ('1', 'on', 'yes', and 'true' 
+bool constraint restricting its accepted values to generic boolean post expressions ('1', 'on', 'yes', and 'true' 
 meaning true / '0', 'off', 'no', 'false', and '' meaning false).
 
 **Beware**: If you add multiple constraints to a single field, any given data will be checked against this constraints 
@@ -69,6 +69,9 @@ Therefore in most cases a required constraint should be added first if needed fo
      * @return bool
      */
     $myUserNameUniquenessValidator = function(Fields\Values\ScalarValue $value) {
+        // empty values are considiered valid
+        if ($value->isEmpty()) return true;
+        
         // return false if the username is already in use
         if (isAlreadyInUse($value->getValue())) {
             return false;
@@ -102,7 +105,7 @@ or radio field) comes with an automatically generated options constraint using t
 
 The 'email' is not marked required but has an email pattern constraint. Any field constraint besides the required
 constraint is considered met by an empty value. In this case the email constraint of the 'email' field will not raise
-any violation if no data or an empty string was assigned to the field. THe same logic applies to the 'gender' field,
+any violation if no data or an empty string was assigned to the field. The same logic applies to the 'gender' field,
 whose option constraint will not be checked on empty values. 
 
 The 'terms' checkbox was marked as required. Therefore the form would be considered invalid if a non-true value was 
@@ -261,12 +264,272 @@ message (e.g. 'missing value for a required field' vs. 'not a valid email addres
 ## manual Installation
 
 # Basic Usage
+Some basic examples of using **FF\Forms** you've seen above.  
+The most common usage scenarios consists of the following steps:
+1. Create a Form instances with a set of form fields and the constraints
+   
+   You can do this by either call the constructor of **Form**
+   
+        use FF\Forms;
+        
+        $myForm = new Form(
+            Form::text('first_name')->required(),
+            Form::text('last_name')->required(),
+            Form::select('gender', ['female', 'male', 'diverse'])
+        );
+        
+   or you just subclass **Form** and do your field and constraint definition there
+   
+        use FF\Forms;
+        
+        /**
+         * @property Fields\TextField $first_name
+         * @property Fields\TextField $last_name
+         * @property Fields\SelectField $gender
+         */
+        class MyForm extends Form
+        {
+            public function __construct()
+            {
+                parent::__construct(
+                    Form::text('first_name')->required(),
+                    Form::text('last_name')->required(),
+                    Form::select('gender', ['female', 'male', 'diverse'])
+                );
+            }
+        }
+        
+   The second approach offers you the benefit of letting your editor and it's auto-complete feature know of the actual 
+   form fields you've added to your form - they are accessible via the magic methods of the form.     
+   
+2. Assign values to the Form instance
+
+   `Form::assign(array $values)` is your method to add values to your form, or to be precise to its fields.
+   In most cases you will be using some of php's magic variables $_POST, $_GET or $_FILES (or some combination there of)
+   as input. But you are by no means restricted to this. 
+   **FF\Forms** is primarily designed to handle html form data. This is reflected by mostly by the naming of many of
+   classes, methods and properties. But in the end, you may validate any data represented by a key/value pair.
+   
+   As soon as you call `assign(array $values)`, the values will be passed to the `setValue()` methods of the 
+   corresponding field identified by the key of the `$values` array. Any key in `$values` that is not present as a form 
+   field will be ignored. On the other hand existing fields that do not get an entry in `$values` will be passed there
+   default values (e.g. an empty string in case of a text field).
+   As a result each and every form field will be assigned a value every time you call `assign(array $values)` on your
+   form.
+   
+   You may add values to single form fields directly:
+   
+        $myForm->my_field->setValue('some value');
+        
+   But you have to be sure to pass the appropriate simple data type (strings in most cases or an array for multi-select
+   fields). You also may pass a suitable instance of the value wrapper classes found under **FF\Forms\Fields\Values**.
+   
+3. Trigger the form value validation
+
+   `Form::isValid(): bool` is your method to trigger the data validation returning the validation result as a boolean. 
+   Once invoked, your Form instance will hold any constraint violation information until you call `Form::reset()`. You
+   may access the complete set of violations via `Form::getViolations()` any field specific violation via
+   `Form->getViolation('my_field');`.
+   
+   In detail the form will call the `isValid()` of all of its fields in the given order. Any negative response will 
+   make the form instance to return `false` as well. Only a complete list of valid fields will make the form instance
+   valid. 
+   
+   *Important notice*  
+   An "empty" form - a form without added values to its fields - is considered valid irrespective of any constraints
+   added to its fields.
+
+4. React according the validation results by either process the form's data (in case of no violations) or handle errors 
+   (if at least a single constraint was not met)
+   
+   The most common scenario would probably be receiving form data from a web client that should be processed via a 
+   controller action or something similar. My approach for this use case often resembles something like this:
+   
+        /**
+         * an action method defined to answer a form page/form submit request
+         */
+        public function contactAction()
+        {
+            $myForm = new ContactForm();
+            do {
+                // scan for post requests
+                if ($_SERVER['REQUEST_METHOD'] != 'POST') break;
+                
+                // assign $_POST values and validate form
+                if (!$myForm->assign($_POST)->isValid()) break;
+                
+                // After this your form holds valid values only.
+                // You may now process the form data by for example
+                // persiting them to a storage device or sending it via mail.
+                // Subsequent to this could redirect to a message page
+                // informing the user of the action's result.
+                
+                return new RedirectResponse(/** redirect target **/);
+            } while (false);
+            
+            // Here the $myForm instance may either by empty or holding values marked as invalid.
+            // So when rendering you form page using the $myForm instance you may use its
+            // api to do condintional output (showing error messages or marking invalid fields).
+            
+            return new MyRespone($myForm);  
+        }
+        
+    **Beware** that this is no functional code. But you should encounter resembling scenarios in many mvc-based 
+    framework or application environments.
 
 # Advanced Usage
 
+Sometimes basic usage isn't enough. You may encounter more complex data validation needs that cannot be represented
+by the constraint classes coming with this package. In this section I will describe some more advanced scenario. 
+
+## Validating Checkbox Groups
+
+If your form contains a checkbox group meaning a list of checkbox fields using the same field name but different values,
+you cannot use the standard checkbox field class to process and validate its values.
+
+An example:
+
+    <form method="post">
+        <div class="checkboxgroup">
+            <label>Do you like ...</label>
+            <div class="checkbox"><input type="checkbox" name="food" value="IT"> Italian food?</div>
+            <div class="checkbox"><input type="checkbox" name="food" value="CH"> Chinese food?</div>
+            <div class="checkbox"><input type="checkbox" name="food" value="MX"> Mexican food?</div>
+            <div class="checkbox"><input type="checkbox" name="food" value="JP"> Japanses food?</div>
+        </div>
+    </form>
+    
+The checkboxes used do not represent a yes/no choice but an n of m selection much like a multi-select field.    
+And according to that you may just use a MultiSelectField instance to represent this structure on the server side.
+
+    use FF\Forms;
+    
+    class FoodChoiceForm extends Form
+    {
+        public function __construct()
+        {
+            parent::__construct(
+                Form::multiSelect('food', ['IT', 'CH', 'MX', 'JP']);
+            );
+        }
+    }
+    
+You could add a required validator to enforce the checking of at least on checkbox.    
+
 ## Adding Custom Constraints
 
-## Doing Custom Form Validation 
+**FF\Forms** comes with a list of built-in constraints. This constraints provide logic for the most common validation
+rules to define for a single field (like marking a field as required or testing for specific input).
+The **CustomConstraint** class on the other hand lets you define your own custom data validation logic. To use it you
+have to provide a callable validation callback and pass it to the constraint.
+
+A valid **CustomConstraint** callback function must meet the following specifications:
+
+1. It must be a `callable` - obviously.
+2. It must accept exactly one argument of the type `FF\Forms\Fields\Values\AbstractValue` or any of its sub classes
+   matching the value type processed be the form field the constraint is added to.
+3. It must return a boolean. True if your logic accepts the value, false if it doesn't.
+
+### Example 1: Testing for Uniqueness of a User Name
+
+    use FF\Forms;
+    
+    class MyRegistrationForm extends Form
+    {
+        public function construct()
+        {
+            parent::__construct(
+                Form::text('username')->required()->custom([$this, 'checkUniqueUsername'),
+                /** more form fields ++/
+            );
+        }
+        
+        /**
+         * Validation callback for the username field's custom constraint
+         *
+         * @param Fields\Values\ScalarValue $value
+         * @return bool
+         */
+        public function checkUniqueUsername(Fields\Values\ScalarValue $value): bool
+        {
+            // You normally want to consider empty values as valid.
+            // Use additional required constraints to ensure user input.
+            if ($value->isEmpty()) return true;
+            
+            $userNameIsUnique = WhatEverYourProjectDoesToCheckThis($value->getValue());
+            
+            return $userNameIsUnique;
+        }
+    }
+    
+### Example 2: Checking the Number of Selected Options    
+    
+If you have a multi-select field (or a similar checkbox group) that require the user to select at least, at most or 
+exactly a specific amount of options, a required constraint just isn't the right choice anymore - at least not as the
+only constraint added to the field.
+
+    use FF\Forms;
+        
+    class FoodChoiceForm extends Form
+    {
+        public function __construct()
+        {
+            parent::__construct(
+                Form::multiSelect('food', ['IT', 'CH', 'MX', 'JP'])->required()->custom([$this;, 'checkOptionCount'])
+            );
+        }
+        
+        /**
+         * Validates that at least two options have been chosen
+         *
+         * @param Fields\Values\ArrayValue $value
+         * @return bool
+         */
+        public function checkOptionCount(Fields\Values\ArrayValue $value): bool
+        {
+            return count($value->toArray()) >= 2;
+        } 
+    }
+    
+## Doing Custom Form Data Assignments     
+
+## Doing Custom Form Validation
+
+Imagine a scenario where your form contains one field (say an email field) that must be filled (is required) if a 
+certain other field has a specific value (say a "send me a notification via email" checkbox).
+Here you cannot add a required constraint to the email field because it should only be required in certain cases (the 
+checkbox field being checked).
+
+In this and similar cases your option of choice is to subclass **Form** class and override its `isValid()` method.
+You may do something like this:
+
+    use FF\Forms;
+    
+    class MyForm extends Form
+    {
+        public function __construct()
+        {
+            parent::__construct(
+                Form::checkbox('notify_me'),
+                Form::text('email')->email() // not required!!
+            );
+        }
+        
+        /**
+         * Override the standard validation routine
+         *
+         * @return bool
+         */
+        public function isValid(): bool
+        {
+            // test if notfiy_me checkbox is checked
+            if ($this->notify_me->isChecked()) {
+                $this->email->required(); // add a required constraint before validation
+            }
+            
+            return parent::isValid();
+        }
+    }
 
 # Form Security
 
