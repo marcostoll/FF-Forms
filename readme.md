@@ -535,9 +535,102 @@ You may do something like this:
 
 # Extending FF\Forms
 
+The main logic of the **FF\Forms** components lays in its fields and constraints definitions. And this would also be the 
+most common point for customization and extension. The component library comes with the definition of all common html
+field types and a bunch of standard constraints ready to use. But it would be reasonable to assume, that this list does
+not satisfy all your project's needs.
+
 ## Adding new Constraint Types
 
-### Extending/Overriding existing Constraint Types
+To add new constraints you may simply use the CustomConstraint described above to use your own validation logic. But
+you may also declare your own Constraint classes. 
+To do this you need to sub class from `FF\Forms\Fields\Constraints\AbstractConstraint` and implement all of its abstract 
+methods. Alternatively you may sub class one of the concrete constraints classes and override the logic you need to 
+change.
+
+    use FF\Forms\Fields\Constraints\AbstractConstraint;
+    
+    class MyConstraint extends AbstractConstraint
+    {
+        /**
+         * Checks the given value violates the constraint's rules
+         *
+         * @param AbstractValue $value
+         * @return AbstractViolation|null
+         */
+        public function check(AbstractValue $value): ?AbstractViolation
+        {
+            // insert your validation logic here
+        }
+    }
+    
+Some hints for writing your own constraints:
+
+- Some constraints use parameters (see MaxLengthConstraint for example). If your constraint needs parameters you should 
+  define an appropriate constructor accepting these parameters in the way you want it to.
+  If you do that, the user of the constraint passes the arguments when adding the constraint to a field via the magic 
+  method.
+  
+        Form::text('my_field')->myConstraint($param1, $param2);
+
+- In most cases your constraints should not raise a violation on empty values. Remember that you do not want to 
+  duplicate the RequiredConstraint. So one of the first things you want to is to test the value for its emptiness.
+  
+        if ($value->isEmpty()) return null; // do not raise violations on empty values     
+
+- Also in most cases you want to return an `FF\Forms\Fields\Constraints\Violations\InvalidValueViolation` if your
+  value check fails. There are a number of different predefined violations. And you also may declare your own custom
+  violation. The may purpose of different violation types is the possibility for processes to react on different
+  violations to for example provide different error messages.
+  
+        return new InvalidValueViolation($this, $value);
+        
+- In many cases the usage of your new constraint will be limited to certain field types and therefore certain value 
+  types. If this is the case you should test the actual class of the `$value` instance passed to your constraint and
+  return null on unsuitable value types (in case someone added your constraint to the wrong field).
+  
+        if (!($value instanceof ScalarValue)) {
+            // non-scalar values do not raise violations
+            return null;
+        }       
+        
+### Register new Constraints to the ConstraintsFactory
+
+Whenever you add a constraint to a field via the magic methods (eg. `Form::text('my_field')->required()`) a suitable 
+constraint instance will be created by the `ConstraintFactory`. Without further configuration the factory will derive 
+the actual name of the constraint class from the magic method's name (`required()` -> `RequiredConstraint`) and will 
+search the `FF\Forms\Fields\Constraints`  namespace for the appropriate class definition.
+
+If you define new constraints (or override existing ones) within your project, you should store their class definitions 
+in your project's namespace and register this namespace at the `ConstraintsFactory`.
+
+Say your define a new constraint class like this:
+
+    namespace MyProject\Forms\Fields\Constraints; // your project's namespace
+    
+    use FF\Forms\Fields\Constraints\AbstractConstraint;
+        
+    class MyConstraint extends AbstractConstraint
+    {
+        /**
+         * Checks the given value violates the constraint's rules
+         *
+         * @param AbstractValue $value
+         * @return AbstractViolation|null
+         */
+        public function check(AbstractValue $value): ?AbstractViolation
+        {
+            // insert your validation logic here
+        }
+    }
+    
+Then - at some point before actually adding a MyConstraint to a field - you do the namespace registering:
+
+    Fieldsfactory::getInstance()->prependNamespaces('MyProject\Forms\Fields\Constraints');
+    
+As soon as you've done that you may add the new constraint to a field using the magic methods.
+
+    Form::text('my_field')->myConstraint(); 
 
 ## Adding new Field Types
 
