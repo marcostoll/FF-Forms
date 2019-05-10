@@ -626,14 +626,28 @@ Say your define a new constraint class like this:
     
 Then - at some point before actually adding a MyConstraint to a field - you do the namespace registering:
 
-    Fieldsfactory::getInstance()->prependNamespaces('MyProject\Forms\Fields\Constraints');
+    ConstraintsFactory::getInstance()->prependNamespaces('MyProject\Forms\Fields\Constraints');
     
 As soon as you've done that you may add the new constraint to a field using the magic methods.
 
     Form::text('my_field')->myConstraint(); 
+    
+**BEWARE** that the local class names (without the namespace) must be unique to function with the magic methods.
+So a `MyProject\Forms\Fields\Constraints\A\MyConstraint` would replace a `...\Constraints\B\MyConstraint` (or vice
+versa) according to the order of the namespaces being registered at the constraints factory.
 
 ## Adding new Field Types
 
 ### Extending/Overriding existing Field Types
+
+The overall process of registering new field classes is exactly the same as with new constraint classes.
+You have to register your project's namespace containing the your field classes tat the `FieldsFactory` before you can
+use the `Form` magic methods to create new instances of your form field.
+
+    FieldsFactory::getInstance()->prependNamespaces('MyProject\Forms\Fields');
+    
+As soon as you've done that you may create the new field using the magic methods.
+
+    Form::myField('my_field');     
 
 ### ToDos / Road map
