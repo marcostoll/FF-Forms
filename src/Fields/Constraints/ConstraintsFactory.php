@@ -20,11 +20,39 @@ use FF\Utilities\Factories\AbstractFactory;
 class ConstraintsFactory extends AbstractFactory
 {
     /**
-     * Auto-prepends the Fast Forward Constraints namespace
+     * @var ConstraintsFactory
      */
-    public function __construct()
+    protected static $instance;
+
+    /**
+     * Declared protected to prevent external usage
+     * Auto-prepends the FF\Forms\Fields\Constraints namespace
+     */
+    protected function __construct()
     {
         $this->prependNamespaces(__NAMESPACE__);
+    }
+
+    /**
+     * Declared protected to prevent external usage
+     */
+    protected function __clone()
+    {
+
+    }
+
+    /**
+     * Retrieves the singleton instance of this class
+     *
+     * @return ConstraintsFactory
+     */
+    public static function getInstance(): ConstraintsFactory
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = new ConstraintsFactory();
+        }
+
+        return self::$instance;
     }
 
     /**

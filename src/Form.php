@@ -348,15 +348,10 @@ class Form
      */
     public static function __callStatic(string $method,  array $args)
     {
-        static $fieldsFactory = null;
-        if (is_null($fieldsFactory)) {
-            $fieldsFactory = new FieldsFactory();
-        }
-
-        $className = ucfirst($method) . self::FIELDS_CLASS_SUFFIX;
-
         try {
-            return $fieldsFactory->create($className, ...$args);
+            $className = ucfirst($method) . self::FIELDS_CLASS_SUFFIX;
+
+            return FieldsFactory::getInstance()->create($className, ...$args);
         } catch (ClassNotFoundException $e) {
             // trigger fatal error: unsupported method call
             // mimic standard php error message

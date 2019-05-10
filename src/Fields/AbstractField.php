@@ -310,15 +310,10 @@ abstract class AbstractField
      */
     public function __call($method, array $args)
     {
-        static $constraintsFactory = null;
-        if (is_null($constraintsFactory)) {
-            $constraintsFactory = new ConstraintsFactory();
-        }
-
-        $className = ucfirst($method) . self::CONSTRAINT_CLASS_SUFFIX;
-
         try {
-            return $this->addConstraint($constraintsFactory->create($className, ...$args));
+            $className = ucfirst($method) . self::CONSTRAINT_CLASS_SUFFIX;
+
+            return $this->addConstraint(ConstraintsFactory::getInstance()->create($className, ...$args));
         } catch (ClassNotFoundException $e) {
             // trigger fatal error: unsupported method call
             // mimic standard php error message
