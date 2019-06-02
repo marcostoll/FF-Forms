@@ -2,7 +2,7 @@
   "name": "fastforward/forms",
   "description": "A component providing form validation and configuration logic - part of the Fast Forward Components Collection",
   "type": "library",
-  "license": "proprietary",
+  "license": "MIT",
   "minimum-stability": "stable",
   "authors": [
     {
@@ -14,8 +14,8 @@
   ],
   "require": {
     "php": ">=7.2",
-    "fastforward/data-structures": "dev-master",
-    "fastforward/utilities": "dev-master"
+    "fastforward/data-structures": "^1.0.0",
+    "fastforward/common": "^1.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^8"
@@ -27,7 +27,7 @@
     },
     {
       "type": "vcs",
-      "url": "https://github.com/marcostoll/FF-Utilities"
+      "url": "https://github.com/marcostoll/FF-Common"
     }
   ],
   "autoload": {
