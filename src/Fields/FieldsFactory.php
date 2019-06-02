@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields;
 
-use FF\Utilities\Factories\AbstractFactory;
+use FF\Common\Factories\AbstractFactory;
 
 /**
  * Class FieldsFactory

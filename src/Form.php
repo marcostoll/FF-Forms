@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace FF\Forms;
 
+use FF\Common\Factories\Exceptions\ClassNotFoundException;
 use FF\DataStructures\Record;
 use FF\Forms\Fields\AbstractField;
 use FF\Forms\Fields\CheckboxField;
@@ -21,7 +22,6 @@ use FF\Forms\Fields\PasswordField;
 use FF\Forms\Fields\RadioField;
 use FF\Forms\Fields\SelectField;
 use FF\Forms\Fields\TextField;
-use FF\Utilities\Factories\Exceptions\ClassNotFoundException;
 
 /**
  * Class Form

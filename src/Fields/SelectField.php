@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields;
 
+use FF\Common\Utils\ArrayUtils;
 use FF\Forms\Fields\Constraints\OptionsConstraint;
-use FF\Utilities\ArrayUtils;
 
 /**
  * Class SelectField

@@ -10,11 +10,11 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields\Constraints;
 
+use FF\Common\Utils\FileUtils;
 use FF\Forms\Fields\Constraints\Violations\AbstractViolation;
 use FF\Forms\Fields\Constraints\Violations\InvalidValueViolation;
 use FF\Forms\Fields\Values\AbstractValue;
 use FF\Forms\Fields\Values\UploadValue;
-use FF\Utilities\FileUtils;
 
 /**
  * Class FileSizeConstraint

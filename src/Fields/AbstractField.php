@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields;
 
+use FF\Common\Factories\Exceptions\ClassNotFoundException;
 use FF\Forms\Fields\Constraints\AbstractConstraint;
 use FF\Forms\Fields\Constraints\ConstraintsFactory;
 use FF\Forms\Fields\Constraints\RequiredConstraint;
 use FF\Forms\Fields\Constraints\Violations\AbstractViolation;
 use FF\Forms\Fields\Constraints\Violations\InvalidValueViolation;
 use FF\Forms\Fields\Values\AbstractValue;
-use FF\Utilities\Factories\Exceptions\ClassNotFoundException;
 
 /**
  * Class AbstractField

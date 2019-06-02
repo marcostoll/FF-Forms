@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields\Constraints;
 
-use FF\Utilities\Factories\AbstractFactory;
+use FF\Common\Factories\AbstractFactory;
 
 /**
  * Class ConstraintsFactory
