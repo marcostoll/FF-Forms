@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields\Constraints\Violations;
 
-use FF\Common\Utils\ClassUtils;
 use FF\Forms\Fields\Constraints\AbstractConstraint;
 use FF\Forms\Fields\Values\AbstractValue;
+use FF\Utils\ClassUtils;
 
 /**
  * Class AbstractViolation

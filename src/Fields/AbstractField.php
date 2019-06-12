@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields;
 
-use FF\Common\Factories\Exceptions\ClassNotFoundException;
+use FF\Factories\Exceptions\ClassNotFoundException;
 use FF\Forms\Fields\Constraints\AbstractConstraint;
 use FF\Forms\Fields\Constraints\ConstraintsFactory;
 use FF\Forms\Fields\Constraints\RequiredConstraint;
