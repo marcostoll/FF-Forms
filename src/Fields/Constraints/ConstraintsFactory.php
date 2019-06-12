@@ -10,7 +10,8 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields\Constraints;
 
-use FF\Common\Factories\AbstractFactory;
+use FF\Factories\AbstractFactory;
+use FF\Factories\ClassLocators\NamespaceClassLocator;
 
 /**
  * Class ConstraintsFactory
@@ -26,11 +27,12 @@ class ConstraintsFactory extends AbstractFactory
 
     /**
      * Declared protected to prevent external usage
-     * Auto-prepends the FF\Forms\Fields\Constraints namespace
+     * Uses a NamespaceClassLocator pre-configured with the FF\Forms\Fields\Constraints namespace.
+     * @see FF\Factories\ClassLocators\NamespaceClassLocator
      */
     protected function __construct()
     {
-        $this->prependNamespaces(__NAMESPACE__);
+        parent::__construct(new NamespaceClassLocator(__NAMESPACE__));
     }
 
     /**
@@ -59,10 +61,10 @@ class ConstraintsFactory extends AbstractFactory
      * {@inheritdoc}
      * @return AbstractConstraint
      */
-    public function create(string $localClassName, ...$args)
+    public function create(string $classIdentifier, ...$args)
     {
         /** @var AbstractConstraint $constraint */
-        $constraint = parent::create($localClassName, ...$args);
+        $constraint = parent::create($classIdentifier, ...$args);
         return $constraint;
     }
 }
