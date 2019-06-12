@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace FF\Forms;
 
-use FF\Common\Factories\Exceptions\ClassNotFoundException;
 use FF\DataStructures\Record;
+use FF\Factories\Exceptions\ClassNotFoundException;
 use FF\Forms\Fields\AbstractField;
 use FF\Forms\Fields\CheckboxField;
 use FF\Forms\Fields\Constraints\Violations\AbstractViolation;

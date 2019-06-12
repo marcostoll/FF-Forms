@@ -10,7 +10,8 @@ declare(strict_types=1);
 
 namespace FF\Forms\Fields;
 
-use FF\Common\Factories\AbstractFactory;
+use FF\Factories\AbstractFactory;
+use FF\Factories\ClassLocators\NamespaceClassLocator;
 
 /**
  * Class FieldsFactory
@@ -26,11 +27,12 @@ class FieldsFactory extends AbstractFactory
 
     /**
      * Declared protected to prevent external usage
-     * Auto-prepends the FF\Forms\Fields namespace
+     * Uses a NamespaceClassLocator pre-configured with the FF\Forms\Fields namespace.
+     * @see FF\Factories\ClassLocators\NamespaceClassLocator
      */
     protected function __construct()
     {
-        $this->prependNamespaces(__NAMESPACE__);
+        parent::__construct(new NamespaceClassLocator(__NAMESPACE__));
     }
 
     /**
@@ -59,10 +61,10 @@ class FieldsFactory extends AbstractFactory
      * {@inheritdoc}
      * @return AbstractField
      */
-    public function create(string $localClassName, ...$args)
+    public function create(string $classIdentifier, ...$args)
     {
         /** @var AbstractField $field */
-        $field = parent::create($localClassName, ...$args);
+        $field = parent::create($classIdentifier, ...$args);
         return $field;
     }
 }
