@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eba611321743daa7e33d9b5cce062a7f",
+    "content-hash": "b86c1273e0ba72c1ef35412c5238f7e3",
     "packages": [
         {
             "name": "fastforward/data-structures",
@@ -56,7 +56,7 @@
         },
         {
             "name": "fastforward/factories",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marcostoll/FF-Factories.git",
@@ -1674,9 +1674,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "fastforward/factories": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

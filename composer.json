@@ -15,7 +15,7 @@
   "require": {
     "php": ">=7.2",
     "fastforward/data-structures": "^1.0.0",
-    "fastforward/factories": "dev-master",
+    "fastforward/factories": "^1.0.0",
     "fastforward/utils": "^1.0.0"
   },
   "require-dev": {
