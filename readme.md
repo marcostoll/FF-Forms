@@ -1,4 +1,4 @@
-FF\Forms | Fast Forward Components Collection
+FF\Forms | Fast Forward Family
 ========================================================================================================================
 
 by Marco Stoll
@@ -6,17 +6,16 @@ by Marco Stoll
 - <marco.stoll@rocketmail.com>
 - <http://marcostoll.de>
 - <https://github.com/marcostoll>
+- <https://github.com/marcostoll/FF>
 - <https://github.com/marcostoll/FF-Forms>
 ------------------------------------------------------------------------------------------------------------------------
 
-# What is the Fast Forward Components Collection?
-The Fast Forward Components Collection, in short **Fast Forward** or **FF**, is a loosely coupled collection of code 
-repositories each addressing common problems while building web application. Multiple **FF** components may be used 
-together if desired. And some more complex **FF** components depend on other rather basic **FF** components.
+# What is the Fast Forward Family?
+Fast Forward, in short **FF**, is a template for building web applications. The **FF Family** is a series of basic
+repositories on which **FF** depends on but may also be used independently if desired.
 
-**FF** is not a framework in and of itself and therefore should not be called so. 
-But you may orchestrate multiple **FF** components to build an web application skeleton that provides the most common 
-tasks.
+**FF** is not a framework in and of itself and therefore should not be called so. But you may orchestrate multiple 
+**FF** components to build an web application skeleton that provides the most common tasks.
 
 # Introduction - What is FF\Forms?
 FF\Forms addresses three common needs:
@@ -261,7 +260,11 @@ message (e.g. 'missing value for a required field' vs. 'not a valid email addres
 
 ## via Composer
 
+@todo
+
 ## manual Installation
+
+@todo
 
 # Basic Usage
 Some basic examples of using **FF\Forms** you've seen above.  
@@ -656,6 +659,9 @@ As soon as you've done that you may create the new field using the magic methods
 
     Form::myField('my_field');     
 
-### ToDos / Road map
+# Road map
 
-@todo
+- XSRF protection
+- Captcha Field/Constraint
+- Google Captcha support
+- fields collection support (e.g. <input name="my-field[]">)

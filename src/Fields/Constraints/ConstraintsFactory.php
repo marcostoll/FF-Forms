@@ -28,7 +28,7 @@ class ConstraintsFactory extends AbstractFactory
     /**
      * Declared protected to prevent external usage
      * Uses a NamespaceClassLocator pre-configured with the FF\Forms\Fields\Constraints namespace.
-     * @see FF\Factories\ClassLocators\NamespaceClassLocator
+     * @see \FF\Factories\ClassLocators\NamespaceClassLocator
      */
     protected function __construct()
     {

@@ -306,7 +306,6 @@ abstract class AbstractField
      * @param string $method
      * @param array $args
      * @return $this
-     * @throws ClassNotFoundException
      */
     public function __call($method, array $args)
     {
