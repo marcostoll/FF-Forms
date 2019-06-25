@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - FF\Forms\Fields\AbstractField</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.xhtml">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.xhtml#FF_Forms_Fields">FF\Forms\Fields</a>
+          </li>
+          <li class="separator">AbstractField</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+          <li>
+            <a href="../source/Fields/AbstractField.php.xhtml#line42">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>FF\Forms\Fields\</small>AbstractField</h1>
+        <h4>Class AbstractField</h4>
+        <p/>
+        <ul/>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class AbstractField
+            {<br/><ul class="none"><li>// constants</li><li>const CONSTRAINT_CLASS_SUFFIX = 'Constraint';</li></ul><ul class="none"><li>// members</li><li>protected  <a href="#members">$name</a>;
+                    </li><li>protected <span title="FF\Forms\Fields\AbstractValue|null">AbstractValue|null</span> <a href="#members">$value</a>;
+                    </li><li>protected array <a href="#members">$constraints</a> =
+                        ;
+                    </li><li>protected <span title="FF\Forms\Fields\Constraints\Violations\AbstractViolation">AbstractViolation</span> <a href="#members">$violation</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/setName.xhtml">setName</a>()
+                    </li><li>public string <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getName.xhtml">getName</a>()
+                    </li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/setValue.xhtml">setValue</a>()
+                    </li><li>public AbstractValue|null <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getValue.xhtml">getValue</a>()
+                    </li><li>public string|array <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getPlain.xhtml">getPlain</a>()
+                    </li><li>public bool <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/hasValue.xhtml">hasValue</a>()
+                    </li><li>public abstract <span title="AbstractValue">AbstractValue</span> <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getDefaultValue.xhtml">getDefaultValue</a>()
+                    </li><li>protected abstract <span title="AbstractValue">AbstractValue</span> <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/makeValue.xhtml">makeValue</a>()
+                    </li><li>protected abstract string <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getExpectedValueClass.xhtml">getExpectedValueClass</a>()
+                    </li><li>protected bool <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/acceptsValue.xhtml">acceptsValue</a>()
+                    </li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/setConstraints.xhtml">setConstraints</a>()
+                    </li><li>public array <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getConstraints.xhtml">getConstraints</a>()
+                    </li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/addConstraint.xhtml">addConstraint</a>()
+                    </li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/removeConstraint.xhtml">removeConstraint</a>()
+                    </li><li>public bool <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/isRequired.xhtml">isRequired</a>()
+                    </li><li>public AbstractViolation|null <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getViolation.xhtml">getViolation</a>()
+                    </li><li>public boolean <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/hasViolation.xhtml">hasViolation</a>()
+                    </li><li>public bool <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/isValid.xhtml">isValid</a>()
+                    </li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/reset.xhtml">reset</a>()
+                    </li><li>public $this <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/__call.xhtml">__call</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="CONSTRAINT_CLASS_SUFFIX">CONSTRAINT_CLASS_SUFFIX</td>
+              <td>'Constraint'</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="constraints"><strong>$constraints</strong>
+                —
+                array</li>
+            <li id="name"><strong>$name</strong>
+                —
+                string</li>
+            <li id="value"><strong>$value</strong>
+                —
+                <a title="FF\Forms\Fields\AbstractValue|null" href="../classes/FF_Forms_Fields_AbstractValue|null.xhtml">FF\Forms\Fields\AbstractValue|null</a></li>
+            <li id="violation"><strong>$violation</strong>
+                —
+                <a title="FF\Forms\Fields\Constraints\Violations\AbstractViolation" href="../classes/FF_Forms_Fields_Constraints_Violations_AbstractViolation.xhtml">FF\Forms\Fields\Constraints\Violations\AbstractViolation</a></li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="acceptsValue"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/acceptsValue.xhtml">acceptsValue()</a>
+                — Checks whether the given value meets the expected value class restriction</li>
+            <li id="getExpectedValueClass"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getExpectedValueClass.xhtml">getExpectedValueClass()</a>
+                — Retrieves the class name of the value class to use for this type of field</li>
+            <li id="makeValue"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/makeValue.xhtml">makeValue()</a>
+                — Retrieves a suitable value object representing the given plain value</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="__call"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/__call.xhtml">__call()</a>
+                — Magic wrapper for adding constraints to a field</li>
+            <li id="addConstraint">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/addConstraint.xhtml">addConstraint()</a>
+            </li>
+            <li id="getConstraints">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getConstraints.xhtml">getConstraints()</a>
+            </li>
+            <li id="getDefaultValue"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getDefaultValue.xhtml">getDefaultValue()</a>
+                — Retrieves a default value suitable for tis instance</li>
+            <li id="getName">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getName.xhtml">getName()</a>
+            </li>
+            <li id="getPlain"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getPlain.xhtml">getPlain()</a>
+                — Retrieves the plain value</li>
+            <li id="getValue">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getValue.xhtml">getValue()</a>
+            </li>
+            <li id="getViolation">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/getViolation.xhtml">getViolation()</a>
+            </li>
+            <li id="hasValue"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/hasValue.xhtml">hasValue()</a>
+                — Checks whether a value was set</li>
+            <li id="hasViolation"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/hasViolation.xhtml">hasViolation()</a>
+                — Checks if a constraint violation was detected during last validation</li>
+            <li id="isRequired"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/isRequired.xhtml">isRequired()</a>
+                — Convenient method for checking if a RequiredConstraint was added to this field</li>
+            <li id="isValid"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/isValid.xhtml">isValid()</a>
+                — Checks if current value passes all value constraints</li>
+            <li id="removeConstraint"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/removeConstraint.xhtml">removeConstraint()</a>
+                — Removes each constraint that is an instance of the class</li>
+            <li id="reset"><a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/reset.xhtml">reset()</a>
+                — Resets the field</li>
+            <li id="setConstraints">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/setConstraints.xhtml">setConstraints()</a>
+            </li>
+            <li id="setName">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/setName.xhtml">setName()</a>
+            </li>
+            <li id="setValue">
+              <a title="FF\Forms\Fields\AbstractField" href="../classes/FF_Forms_Fields_AbstractField/setValue.xhtml">setValue()</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2019-06-17T10:57:38+02:00 (commit #<span title="7939293ce9edbcfbc987a08483e7644cf9767f07">7939293</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[FIX] fix docblock</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-06-12T13:16:21+02:00 (commit #<span title="65b9830809ac4174bddd59a9e5b73b9e8e2b2329">65b9830</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[REFACTOR] use FF\Utils and FF\Factories instead of FF\Common</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-06-02T13:03:29+02:00 (commit #<span title="068ad70248c968789f33e86914bc14067b9e8e8d">068ad70</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[CHANGE] adapt to FF\Common</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-05-10T13:05:08+02:00 (commit #<span title="e36f435827a59e2c6c2a6a949f87c5f88460cdd6">e36f435</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[CHANGE] use singleton factories</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-05-03T10:15:59+02:00 (commit #<span title="1629f42915c44b09d3f0a056b412be6f1aa5ba5c">1629f42</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[FEATURE] add MatchesConstraint</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-05-03T09:55:18+02:00 (commit #<span title="550b8a77f4ff35f4c7053ef86126b1c4061e2c8f">550b8a7</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[REFACTOR] moved ABstractFactory to FF\Utilities</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-04-25T14:54:13+02:00 (commit #<span title="76ab9a9223e29e69a5fe20511e46463b0b91dc8c">76ab9a9</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">[TASK] adapt to changed base class signature</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2019-04-16T11:25:59+02:00 (commit #<span title="d270862b5212125e6b664e2e104341eeb75fff52">d270862</span>)</h3>
+            <div>
+              <p>
+                        Author: Marco Stoll (marco.stoll@rocketmail.com) /
+                        Commiter: Marco Stoll (marco.stoll@rocketmail.com)
+                    </p>
+              <pre class="wrapped">initial commit</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.12.0-dev - Copyright (C) 2010 - 2019 by Arne Blankerts and Contributors</span>
+    </footer>
+  </body>
+</html>
