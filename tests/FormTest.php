@@ -351,6 +351,22 @@ class FormTest extends TestCase
     /**
      * Tests the namesake method/feature
      */
+    public function testhasViolation()
+    {
+        $this->uut->setFields([
+            (new TextField('username'))->addConstraint(new RequiredConstraint()),
+            (new PasswordField('password'))->addConstraint((new MinLengthConstraint(6)))
+        ])
+            ->assign(['username' => '', 'password' => '123456'])
+            ->isValid();
+
+        $this->assertTrue($this->uut->hasViolation('username'));
+        $this->assertFalse($this->uut->hasViolation('password'));
+    }
+
+    /**
+     * Tests the namesake method/feature
+     */
     public function testMagicGet()
     {
         $value = new TextField('username');

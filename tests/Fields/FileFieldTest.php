@@ -66,6 +66,15 @@ class FileFieldTest extends TestCase
     /**
      * Tests the namesake method/feature
      */
+    public function testGetValue()
+    {
+        $uploadEmpty = new UploadValue();
+        $this->assertSame($uploadEmpty, $this->uut->setValue($uploadEmpty)->getValue());
+    }
+
+    /**
+     * Tests the namesake method/feature
+     */
     public function testIsValid()
     {
         $uploadEmpty = new UploadValue();
@@ -111,10 +120,18 @@ class FileFieldTest extends TestCase
     /**
      * Tests the namesake method/feature
      */
+    public function testGetDefaultValue()
+    {
+        $this->assertInstanceOf(UploadValue::class, $this->uut->getDefaultValue());
+    }
+
+    /**
+     * Tests the namesake method/feature
+     */
     public function testSetValueInvalid()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->uut->setValue(new ArrayValue());;
+        $this->uut->setValue(new ArrayValue());
     }
 }

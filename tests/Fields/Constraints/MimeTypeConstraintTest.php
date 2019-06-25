@@ -96,6 +96,17 @@ class MimeTypeConstraintTest extends TestCase
     /**
      * Tests the namesake method/feature
      */
+    public function testCheckErrorTypePattern()
+    {
+        $imgFile = ['error' => UPLOAD_ERR_OK, 'type' => 'foo'];
+
+        $this->uut->setAcceptedTypes(['image/png']);
+        $this->assertInstanceOf(InvalidValueViolation::class, $this->uut->check(new UploadValue($imgFile)));
+    }
+
+    /**
+     * Tests the namesake method/feature
+     */
     public function testCheckUnsuited()
     {
         $this->assertNull($this->uut->check(new ScalarValue('foo')));

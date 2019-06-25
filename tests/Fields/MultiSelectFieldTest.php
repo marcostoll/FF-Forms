@@ -47,6 +47,14 @@ class MultiSelectFieldTest extends TestCase
     /**
      * Tests the namesake method/feature
      */
+    public function testGetDefaultValue()
+    {
+        $this->assertInstanceOf(ArrayValue::class, $this->uut->getDefaultValue());
+    }
+
+    /**
+     * Tests the namesake method/feature
+     */
     public function testIsValid()
     {
         $this->assertTrue($this->uut->setValue(new ArrayValue(['bar', 'baz']))->isValid());

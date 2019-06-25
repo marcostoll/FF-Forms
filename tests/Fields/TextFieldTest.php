@@ -43,4 +43,13 @@ class TextFieldTest extends TestCase
 
         $this->uut->setValue(new ArrayValue());
     }
+
+    /**
+     * Tests the namesake method/feature
+     */
+    public function testSetValueArrayConvert()
+    {
+        $value = 'foo';
+        $this->assertEquals($value, $this->uut->setValue([$value])->getValue()->getValue());
+    }
 }
