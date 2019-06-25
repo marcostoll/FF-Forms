@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - FF\Forms\Fields\AbstractField::__call</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../../index.xhtml">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../../namespaces.xhtml">Namespaces</a>
+        </li>
+        <li>
+          <a href="../../classes.xhtml">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../../source/index.xhtml">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../../index.xhtml">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../../classes.xhtml">Classes</a>
+          </li>
+          <li class="separator">
+            <a href="../../classes.xhtml#FF_Forms_Fields">FF\Forms\Fields</a>
+          </li>
+          <li class="separator">
+            <a title="FF\Forms\Fields\AbstractField" href="../../classes/FF_Forms_Fields_AbstractField.xhtml">AbstractField</a>
+          </li>
+          <li class="separator">__call</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#parameter">Parameter</a>
+          </li>
+          <li>
+            <a href="#return">Return</a>
+          </li>
+          <li>
+            <a href="../../source/Fields/AbstractField.php.xhtml#line310">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1><small>FF\Forms\Fields\AbstractField::</small>__call</h1>
+        <h4>Magic wrapper for adding constraints to a field</h4>
+        <p>Use the first part of the constraints class name (stripping the 'Constraint' suffix)
+with a lower-cased first letter as magic method.
+Any additional arguments passed to the magic method will be passed to the constraint's constructor
+in the given order.
+
+Examples:
+&lt;code&gt;
+$myField-&gt;required()     &lt;=&gt; $myField-&gt;addConstraint(new \FF\Forms\Constraints\RequiredConstraint())
+$myField-&gt;minLength(8)   &lt;=&gt; $myField-&gt;addConstraint(new \FF\Forms\Constraints\MinLengthConstraint(8))
+&lt;/code&gt;
+
+Can be chained.
+
+Example:
+&lt;code&gt;
+$myField-&gt;required()-&gt;minLength(8);
+&lt;/code&gt;</p>
+        <ul/>
+        <h2 id="signature">Signature</h2>
+        <div class="styled synopsis">
+          <code>public function __call(string
+        $method,
+            array
+        $args )
+            </code>
+        </div>
+        <h2 id="parameterlist">Parameters</h2>
+        <dl class="styled">
+          <dt><code>$method</code>
+                —
+                string</dt>
+          <dd/>
+          <dt><code>$args</code>
+                —
+                array</dt>
+          <dd/>
+        </dl>
+        <h2 id="return">Returns</h2>
+        <dl class="styled">
+          <dt>$this</dt>
+          <dd><br/>
+        </dd>
+        </dl>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.12.0-dev - Copyright (C) 2010 - 2019 by Arne Blankerts and Contributors</span>
+    </footer>
+  </body>
+</html>
