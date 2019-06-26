@@ -40,7 +40,6 @@ class ConstraintsFactory extends AbstractFactory
      */
     protected function __clone()
     {
-
     }
 
     /**

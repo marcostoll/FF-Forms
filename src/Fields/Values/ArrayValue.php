@@ -68,7 +68,9 @@ class ArrayValue extends AbstractValue
      */
     public function isEmpty(): bool
     {
-        if (empty($this->value)) return true;
+        if (empty($this->value)) {
+            return true;
+        }
 
         return strlen(implode('', $this->value)) == 0;
     }

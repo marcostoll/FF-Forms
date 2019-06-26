@@ -109,7 +109,9 @@ class FileField extends AbstractField
      */
     public function getFileName()
     {
-        if (!$this->hasValue()) return null;
+        if (!$this->hasValue()) {
+            return null;
+        }
         return $this->value->getValue()->getName();
     }
 
@@ -120,7 +122,9 @@ class FileField extends AbstractField
      */
     public function getFileType()
     {
-        if (!$this->hasValue()) return null;
+        if (!$this->hasValue()) {
+            return null;
+        }
         return $this->value->getValue()->getType();
     }
 
@@ -131,7 +135,9 @@ class FileField extends AbstractField
      */
     public function getFileSize()
     {
-        if (!$this->hasValue()) return null;
+        if (!$this->hasValue()) {
+            return null;
+        }
         return $this->value->getValue()->getSize();
     }
 
@@ -142,7 +148,9 @@ class FileField extends AbstractField
      */
     public function getFileTmpName()
     {
-        if (!$this->hasValue()) return null;
+        if (!$this->hasValue()) {
+            return null;
+        }
         return $this->value->getValue()->getTmpName();
     }
 
@@ -153,7 +161,9 @@ class FileField extends AbstractField
      */
     public function getFileError()
     {
-        if (!$this->hasValue()) return null;
+        if (!$this->hasValue()) {
+            return null;
+        }
         return $this->value->getValue()->getError();
     }
 }

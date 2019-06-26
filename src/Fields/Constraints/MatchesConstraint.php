@@ -67,8 +67,12 @@ class MatchesConstraint extends AbstractConstraint
         }
 
         $matchingValue = $this->matchingField->getValue();
-        if (is_null($matchingValue)) return new InvalidValueViolation($this, $value);
-        if (get_class($value) != get_class($matchingValue)) return new InvalidValueViolation($this, $value);
+        if (is_null($matchingValue)) {
+            return new InvalidValueViolation($this, $value);
+        }
+        if (get_class($value) != get_class($matchingValue)) {
+            return new InvalidValueViolation($this, $value);
+        }
 
         return ($value->getValue() != $matchingValue->getValue()) ?
             new InvalidValueViolation($this, $value) :

@@ -26,5 +26,5 @@ abstract class AbstractConstraint
      * @param AbstractValue $value
      * @return AbstractViolation|null
      */
-    public abstract function check(AbstractValue $value): ?AbstractViolation;
+    abstract public function check(AbstractValue $value): ?AbstractViolation;
 }

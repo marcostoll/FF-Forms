@@ -105,9 +105,14 @@ class CustomConstraint extends AbstractConstraint
      */
     public function check(AbstractValue $value): ?AbstractViolation
     {
-        if ($value->isEmpty()) return null; // empty values do not raise violations
+        if ($value->isEmpty()) {
+            // empty values do not raise violations
+            return null;
+        }
 
-        if (call_user_func($this->validator, $value)) return null;
+        if (call_user_func($this->validator, $value)) {
+            return null;
+        }
 
         /** @var AbstractViolation $violation */
         $violation = new $this->violationClass($this, $value);

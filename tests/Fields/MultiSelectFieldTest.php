@@ -70,6 +70,6 @@ class MultiSelectFieldTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->uut->setValue(new ScalarValue());;
+        $this->uut->setValue(new ScalarValue());
     }
 }

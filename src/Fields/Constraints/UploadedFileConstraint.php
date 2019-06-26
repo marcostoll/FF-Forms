@@ -41,7 +41,7 @@ class UploadedFileConstraint extends AbstractConstraint
     public function __construct(callable $uploadedFileValidator = null)
     {
         if (is_null($uploadedFileValidator)) {
-            $uploadedFileValidator = function(string $tmpFileName) {
+            $uploadedFileValidator = function (string $tmpFileName) {
                 return is_uploaded_file($tmpFileName);
             };
         }

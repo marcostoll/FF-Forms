@@ -136,7 +136,7 @@ abstract class AbstractField
      *
      * @return AbstractValue
      */
-    public abstract function getDefaultValue(): AbstractValue;
+    abstract public function getDefaultValue(): AbstractValue;
 
     /**
      * Retrieves a suitable value object representing the given plain value
@@ -144,14 +144,14 @@ abstract class AbstractField
      * @param string|array
      * @return AbstractValue
      */
-    protected abstract function makeValue($plainValue): AbstractValue;
+    abstract protected function makeValue($plainValue): AbstractValue;
 
     /**
      * Retrieves the class name of the value class to use for this type of field
      *
      * @return string
      */
-    protected abstract function getExpectedValueClass(): string;
+    abstract protected function getExpectedValueClass(): string;
 
     /**
      * Checks whether the given value meets the expected value class restriction
@@ -219,7 +219,9 @@ abstract class AbstractField
     public function isRequired(): bool
     {
         foreach ($this->constraints as $constraint) {
-            if ($constraint instanceof RequiredConstraint) return true;
+            if ($constraint instanceof RequiredConstraint) {
+                return true;
+            }
         }
 
         return false;
@@ -257,10 +259,14 @@ abstract class AbstractField
     {
         $this->violation = null; // clear last violation (if any)
 
-        if (!$this->hasValue()) return true;
+        if (!$this->hasValue()) {
+            return true;
+        }
 
         foreach ($this->constraints as $constraint) {
-            if (!$this->value->meetsConstraint($constraint, $this->violation)) return false;
+            if (!$this->value->meetsConstraint($constraint, $this->violation)) {
+                return false;
+            }
         }
 
         return true;

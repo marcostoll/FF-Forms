@@ -35,9 +35,10 @@ class CustomConstraintTest extends TestCase
      */
     protected function setUp(): void
     {
-        $validator = function(AbstractValue $value) {
-            if (!($value instanceof ScalarValue)) return true;
-
+        $validator = function (AbstractValue $value) {
+            if (!($value instanceof ScalarValue)) {
+                return true;
+            }
             return $value->getValue() == 'foo';
         };
         $this->uut = new CustomConstraint($validator);
@@ -48,9 +49,10 @@ class CustomConstraintTest extends TestCase
      */
     public function testSetGetValidator()
     {
-        $value = function(AbstractValue $value) {
-            if (!($value instanceof ScalarValue)) return true;
-
+        $value = function (AbstractValue $value) {
+            if (!($value instanceof ScalarValue)) {
+                return true;
+            }
             return $value->getValue() == 'foo';
         };
         $same = $this->uut->setValidator($value);

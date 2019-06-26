@@ -41,6 +41,6 @@ class PasswordFieldTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->uut->setValue(new ArrayValue());;
+        $this->uut->setValue(new ArrayValue());
     }
 }

@@ -43,9 +43,10 @@ class BoolConstraint extends FilterConstraint
         }
 
         $filteredValue = filter_var($value, $this->filter, $this->options);
-        if (!is_null($filteredValue)) return null;
+        if (!is_null($filteredValue)) {
+            return null;
+        }
 
         return new InvalidValueViolation($this, $value);
     }
-
 }

@@ -228,7 +228,9 @@ class AbstractFieldTest extends TestCase
     {
         $constraints = $this->uut->minLength(6)->getConstraints();
         foreach ($constraints as $constraint) {
-            if (!($constraint instanceof MinLengthConstraint)) continue;
+            if (!($constraint instanceof MinLengthConstraint)) {
+                continue;
+            }
 
             $this->assertEquals(6, $constraint->getMinLength());
             return;

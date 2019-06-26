@@ -40,7 +40,6 @@ class FieldsFactory extends AbstractFactory
      */
     protected function __clone()
     {
-
     }
 
     /**

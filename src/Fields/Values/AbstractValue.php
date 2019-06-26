@@ -58,7 +58,7 @@ abstract class AbstractValue
      *
      * @return bool
      */
-    public abstract function isEmpty(): bool;
+    abstract public function isEmpty(): bool;
 
     /**
      * Checks if this value meets the given constraint
@@ -78,5 +78,5 @@ abstract class AbstractValue
      *
      * @return mixed
      */
-    public abstract function __toString(): string;
+    abstract public function __toString(): string;
 }

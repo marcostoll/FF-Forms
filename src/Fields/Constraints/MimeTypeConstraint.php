@@ -71,7 +71,9 @@ class MimeTypeConstraint extends AbstractConstraint
      */
     public function check(AbstractValue $value): ?AbstractViolation
     {
-        if (empty($this->acceptedTypes)) return null;
+        if (empty($this->acceptedTypes)) {
+            return null;
+        }
 
         if (!($value instanceof UploadValue) || $value->isEmpty()) {
             // non-upload or empty values do not raise violations
@@ -87,10 +89,10 @@ class MimeTypeConstraint extends AbstractConstraint
         $valueType = $uploadStructure->getType();
         $superType = $match[1];
         foreach ($this->acceptedTypes as $mimeType) {
-            if (strstr($mimeType, '/')) {
-                if ($mimeType != $valueType) continue;
-            } else {
-                if ($mimeType != $superType) continue;
+            if (strstr($mimeType, '/') && $mimeType != $valueType) {
+                continue;
+            } elseif ($mimeType != $superType) {
+                continue;
             }
 
             return null;

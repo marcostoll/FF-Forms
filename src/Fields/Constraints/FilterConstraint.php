@@ -102,7 +102,9 @@ class FilterConstraint extends AbstractConstraint
         }
 
         $filteredValue = filter_var($value, $this->filter, $this->options);
-        if (!is_null($filteredValue) && $filteredValue !== false) return null;
+        if (!is_null($filteredValue) && $filteredValue !== false) {
+            return null;
+        }
 
         return new InvalidValueViolation($this, $value);
     }

@@ -346,7 +346,7 @@ class Form
      * @return AbstractField
      * @throws ClassNotFoundException
      */
-    public static function __callStatic(string $method,  array $args)
+    public static function __callStatic(string $method, array $args)
     {
         try {
             $className = ucfirst($method) . self::FIELDS_CLASS_SUFFIX;

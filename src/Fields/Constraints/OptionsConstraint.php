@@ -63,16 +63,25 @@ class OptionsConstraint extends AbstractConstraint
      */
     public function check(AbstractValue $value): ?AbstractViolation
     {
-        if (empty($this->options)) return null;
+        if (empty($this->options)) {
+            return null;
+        }
 
-        if ($value->isEmpty()) return null; // empty values do not raise violations
+        if ($value->isEmpty()) {
+            // empty values do not raise violations
+            return null;
+        }
 
         switch (get_class($value)) {
             case ScalarValue::class:
-                if (in_array($value->getValue(), $this->options)) return null;
+                if (in_array($value->getValue(), $this->options)) {
+                    return null;
+                }
                 break;
             case ArrayValue::class:
-                if (empty(array_diff($value->getValue(), $this->options))) return null;
+                if (empty(array_diff($value->getValue(), $this->options))) {
+                    return null;
+                }
                 break;
             case UploadValue::class:
                 // no break -> proceed with next
