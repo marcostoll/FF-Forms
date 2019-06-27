@@ -89,9 +89,10 @@ class MimeTypeConstraint extends AbstractConstraint
         $valueType = $uploadStructure->getType();
         $superType = $match[1];
         foreach ($this->acceptedTypes as $mimeType) {
-            if (strstr($mimeType, '/') && $mimeType != $valueType) {
+            $superTypeOnly = (strstr($mimeType, '/') === false);
+            if (!$superTypeOnly && $mimeType != $valueType) {
                 continue;
-            } elseif ($mimeType != $superType) {
+            } elseif ($superTypeOnly && $mimeType != $superType) {
                 continue;
             }
 
