@@ -117,7 +117,7 @@ class Form
     protected $violations;
 
     /**
-     * @param AbstractField ...$fields
+     * @param AbstractField[] $fields
      */
     public function __construct(AbstractField ...$fields)
     {

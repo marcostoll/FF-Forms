@@ -27,43 +27,43 @@ class UploadedFileConstraint extends AbstractConstraint
     /**
      * @var callable
      */
-    protected $uploadedFileValidator;
+    protected $validator;
 
     /**
-     * $uploadedFileValidator must be a callback function accepting a single argument
+     * $validator must be a callback function accepting a single argument
      * (the temporary name of an uploaded file) and returning a boolean value.
      *
-     * If $uploadedFileValidator is omitted php's build in is_uploaded_file() function is used instead.
+     * If $validator is omitted php's build in is_uploaded_file() function is used instead.
      *
-     * @param callable $uploadedFileValidator
+     * @param callable $validator
      * @see http://php.net/is_uploaded_file
      */
-    public function __construct(callable $uploadedFileValidator = null)
+    public function __construct(callable $validator = null)
     {
-        if (is_null($uploadedFileValidator)) {
-            $uploadedFileValidator = function (string $tmpFileName) {
+        if (is_null($validator)) {
+            $validator = function (string $tmpFileName) {
                 return is_uploaded_file($tmpFileName);
             };
         }
 
-        $this->setUploadedFileValidator($uploadedFileValidator);
+        $this->setValidator($validator);
     }
 
     /**
      * @return callable
      */
-    public function getUploadedFileValidator(): callable
+    public function getValidator(): callable
     {
-        return $this->uploadedFileValidator;
+        return $this->validator;
     }
 
     /**
-     * @param callable $uploadedFileValidator
+     * @param callable $validator
      * @return $this
      */
-    public function setUploadedFileValidator(callable $uploadedFileValidator)
+    public function setValidator(callable $validator)
     {
-        $this->uploadedFileValidator = $uploadedFileValidator;
+        $this->validator = $validator;
         return $this;
     }
 
@@ -82,7 +82,7 @@ class UploadedFileConstraint extends AbstractConstraint
 
         switch ($value->getValue()->getError()) {
             case UPLOAD_ERR_OK:
-                if (!call_user_func($this->uploadedFileValidator, $value->getValue()->getTmpName())) {
+                if (!call_user_func($this->validator, $value->getValue()->getTmpName())) {
                     return new InvalidValueViolation($this, $value);
                 }
                 return null;
@@ -91,22 +91,22 @@ class UploadedFileConstraint extends AbstractConstraint
                 return null;
             case UPLOAD_ERR_INI_SIZE:
                 //file size exceeds the upload_max_filesize directive in php configuration
-                return new ConfigurationViolation($this, $value);
+                // no break -> proceed with next
             case UPLOAD_ERR_FORM_SIZE:
                 // file size exceeds the MAX_FILE_SIZE directive 'specified in the HTML form configuration
-                return new ConfigurationViolation($this, $value);
+                // no break -> proceed with next
             case UPLOAD_ERR_EXTENSION:
                 // file upload stopped by php extension
                 return new ConfigurationViolation($this, $value);
             case UPLOAD_ERR_PARTIAL:
                 // file was only uploaded partially
-                return new SystemStateViolation($this, $value);
+                // no break -> proceed with next
             case UPLOAD_ERR_NO_TMP_DIR:
                 // temporary folder missing
-                return new SystemStateViolation($this, $value);
+                // no break -> proceed with next
             case UPLOAD_ERR_CANT_WRITE:
                 // failed to write to temporary files directory
-                return new SystemStateViolation($this, $value);
+                // no break -> proceed with next
             default:
                 // unknown upload error
                 return new SystemStateViolation($this, $value);

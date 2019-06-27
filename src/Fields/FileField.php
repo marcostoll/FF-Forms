@@ -32,16 +32,16 @@ class FileField extends AbstractField
      * $uploadedFileValidator must be a callback function accepting a single argument
      * (the temporary name of an uploaded file) and returning a boolean value.
      *
-     * If $uploadedFileValidator is omitted php's build in is_uploaded_file() function is used instead.
+     * If $uploadedValidator is omitted php's build in is_uploaded_file() function is used instead.
      *
      * @param string $name
-     * @param callable $uploadedFileValidator
+     * @param callable $uploadedValidator
      * @see http://php.net/is_uploaded_file
      */
-    public function __construct(string $name, callable $uploadedFileValidator = null)
+    public function __construct(string $name, callable $uploadedValidator = null)
     {
         $this->setName($name)
-            ->addConstraint(new UploadedFileConstraint($uploadedFileValidator));
+            ->addConstraint(new UploadedFileConstraint($uploadedValidator));
     }
 
     /**

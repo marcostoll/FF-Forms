@@ -81,24 +81,36 @@ class MimeTypeConstraint extends AbstractConstraint
         }
 
         $uploadStructure = $value->getValue();
-        if (!preg_match('~^([a-z-]+)/[a-z0-9.-]+$~', $uploadStructure->getType(), $match)) {
+        $valueType = $uploadStructure->getType();
+        if (!preg_match('~^([a-z-]+)/[a-z0-9.-]+$~', $valueType, $match)) {
             // no valid mime type pattern in upload value structure
             return new InvalidValueViolation($this, $value);
         }
-
-        $valueType = $uploadStructure->getType();
         $superType = $match[1];
+
+        return !$this->checkMatch($valueType, $superType) ? new InvalidValueViolation($this, $value) : null;
+    }
+
+    /**
+     * Checks whether a matching mime type is configured
+     *
+     * @param string $fullType
+     * @param string $superType
+     * @return bool
+     */
+    protected function checkMatch(string $fullType, string $superType): bool
+    {
         foreach ($this->acceptedTypes as $mimeType) {
             $superTypeOnly = (strstr($mimeType, '/') === false);
-            if (!$superTypeOnly && $mimeType != $valueType) {
+            if (!$superTypeOnly && $mimeType != $fullType) {
                 continue;
             } elseif ($superTypeOnly && $mimeType != $superType) {
                 continue;
             }
 
-            return null;
+            return true;
         }
 
-        return new InvalidValueViolation($this, $value);
+        return false;
     }
 }

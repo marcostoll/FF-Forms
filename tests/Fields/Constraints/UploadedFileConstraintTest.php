@@ -42,14 +42,14 @@ class UploadedConstraintTest extends TestCase
     /**
      * Tests the namesake method/feature
      */
-    public function testSetGetUploadedFileValidator()
+    public function testSetGetValidator()
     {
         $value = function (string $tmpFileName) {
             return $tmpFileName == 'foo';
         };
-        $same = $this->uut->setUploadedFileValidator($value);
+        $same = $this->uut->setValidator($value);
         $this->assertSame($this->uut, $same);
-        $this->assertEquals($value, $this->uut->getUploadedFileValidator());
+        $this->assertEquals($value, $this->uut->getValidator());
     }
 
     /**
