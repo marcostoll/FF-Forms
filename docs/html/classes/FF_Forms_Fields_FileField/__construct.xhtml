@@ -69,14 +69,14 @@
         <p>$uploadedFileValidator must be a callback function accepting a single argument
 (the temporary name of an uploaded file) and returning a boolean value.
 
-If $uploadedFileValidator is omitted php's build in is_uploaded_file() function is used instead.</p>
+If $uploadedValidator is omitted php's build in is_uploaded_file() function is used instead.</p>
         <ul/>
         <h2 id="signature">Signature</h2>
         <div class="styled synopsis">
           <code>public function __construct(string
         $name,
             [callable
-        $uploadedFileValidator = NULL] )
+        $uploadedValidator = NULL] )
             </code>
         </div>
         <h2 id="parameterlist">Parameters</h2>
@@ -85,7 +85,7 @@ If $uploadedFileValidator is omitted php's build in is_uploaded_file() function 
                 —
                 string</dt>
           <dd/>
-          <dt><code>$uploadedFileValidator</code>
+          <dt><code>$uploadedValidator</code>
                 —
                 callable</dt>
           <dd><br/><br/><br/>      </dd>
