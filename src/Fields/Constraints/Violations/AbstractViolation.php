@@ -85,6 +85,6 @@ abstract class AbstractViolation
     public function __toString(): string
     {
         return ClassUtils::getLocalClassName(get_class($this->constraint))
-            . 'is violated by value [' . $this->value . ']';
+            . ' is violated by value [' . $this->value . ']';
     }
 }
