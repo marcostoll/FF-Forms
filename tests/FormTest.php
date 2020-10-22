@@ -266,7 +266,7 @@ class FormTest extends TestCase
      */
     public function testGetViolationsNoAssign()
     {
-        $this->assertEmpty($this->uut->getViolations());
+        $this->assertTrue($this->uut->getViolations()->isEmpty());
     }
 
     /**
@@ -295,7 +295,7 @@ class FormTest extends TestCase
             ->assign(['username' => 'Wumbo', 'password' => '123456'])
             ->isValid();
 
-        $this->assertEmpty($this->uut->getViolations());
+        $this->assertTrue($this->uut->getViolations()->isEmpty());
     }
 
     /**

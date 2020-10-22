@@ -210,11 +210,11 @@ class Form
     }
 
     /**
-     * @return AbstractViolation[]
+     * @return Record
      */
-    public function getViolations(): array
+    public function getViolations(): Record
     {
-        return array_values($this->violations->getDataAsArray());
+        return $this->violations;
     }
 
     /**
