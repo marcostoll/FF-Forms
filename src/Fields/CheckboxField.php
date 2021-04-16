@@ -37,6 +37,6 @@ class CheckboxField extends TextField
      */
     public function isChecked(): bool
     {
-        return filter_var($this->value->getPlain(), FILTER_VALIDATE_BOOLEAN);
+        return filter_var($this->getPlain(), FILTER_VALIDATE_BOOLEAN);
     }
 }
