@@ -26,7 +26,7 @@ class IntConstraint extends FilterConstraint
      */
     public function __construct(int $minValue = null, int $maxValue = null, int $flags = null)
     {
-        $options = null;
+        $options = [];
         if (!is_null($minValue)) {
             $options['options']['min_range'] = $minValue;
         }
@@ -36,6 +36,7 @@ class IntConstraint extends FilterConstraint
         if (!is_null($maxValue)) {
             $options['flags'] = $flags;
         }
+        if (empty($options)) $options = 0;
 
         parent::__construct(FILTER_VALIDATE_INT, $options);
     }
