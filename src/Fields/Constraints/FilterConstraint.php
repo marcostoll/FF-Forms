@@ -37,16 +37,16 @@ class FilterConstraint extends AbstractConstraint
     protected $filter;
 
     /**
-     * @var mixed|null
+     * @var array|int
      * @see http://php.net/manual/en/filter.filters.validate.php
      */
-    protected $options;
+    protected $options = 0;
 
     /**
      * @param int $filter
-     * @param mixed $options
+     * @param array|int $options
      */
-    public function __construct(int $filter, $options = null)
+    public function __construct(int $filter, $options = 0)
     {
         $this->setFilter($filter)
             ->setOptions($options);
@@ -71,7 +71,7 @@ class FilterConstraint extends AbstractConstraint
     }
 
     /**
-     * @return mixed|null
+     * @return array|int
      */
     public function getOptions()
     {
@@ -79,7 +79,7 @@ class FilterConstraint extends AbstractConstraint
     }
 
     /**
-     * @param mixed|null $options
+     * @param array|int $options
      * @return $this
      */
     public function setOptions($options)

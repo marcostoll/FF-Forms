@@ -20,9 +20,9 @@ namespace FF\Forms\Fields\Constraints;
 class EmailConstraint extends FilterConstraint
 {
     /**
-     * @param mixed $options
+     * @param array|int $options
      */
-    public function __construct($options = null)
+    public function __construct($options = 0)
     {
         parent::__construct(FILTER_VALIDATE_EMAIL, $options);
     }
