@@ -60,7 +60,7 @@ class FieldsFactory extends AbstractFactory
      * {@inheritdoc}
      * @return AbstractField
      */
-    public function create(string $classIdentifier, ...$args)
+    public function create(string $classIdentifier, ...$args): object
     {
         /** @var AbstractField $field */
         $field = parent::create($classIdentifier, ...$args);

@@ -60,7 +60,7 @@ class ConstraintsFactory extends AbstractFactory
      * {@inheritdoc}
      * @return AbstractConstraint
      */
-    public function create(string $classIdentifier, ...$args)
+    public function create(string $classIdentifier, ...$args): object
     {
         /** @var AbstractConstraint $constraint */
         $constraint = parent::create($classIdentifier, ...$args);
