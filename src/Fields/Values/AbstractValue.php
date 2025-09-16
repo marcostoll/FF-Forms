@@ -64,10 +64,10 @@ abstract class AbstractValue
      * Checks if this value meets the given constraint
      *
      * @param AbstractConstraint $constraint
-     * @param AbstractViolation $violation Argument to fill with the detected violation (if any)
+     * @param AbstractViolation|null $violation Argument to fill with the detected violation (if any)
      * @return bool
      */
-    public function meetsConstraint(AbstractConstraint $constraint, AbstractViolation &$violation = null): bool
+    public function meetsConstraint(AbstractConstraint $constraint, ?AbstractViolation &$violation = null): bool
     {
         $violation = $constraint->check($this);
         return is_null($violation);
