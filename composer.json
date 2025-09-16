@@ -14,9 +14,9 @@
   ],
   "require": {
     "php": ">=7.2",
-    "fastforward/data-structures": "^1.0.0",
-    "fastforward/factories": "^1.2.0",
-    "fastforward/utils": "^1.1.0"
+    "fastforward/data-structures": "^1.0.8",
+    "fastforward/factories": "^1.2.4",
+    "fastforward/utils": "^1.1.2"
   },
   "require-dev": {
     "phpmd/phpmd" : "@stable",
