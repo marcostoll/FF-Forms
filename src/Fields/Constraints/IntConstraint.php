@@ -24,7 +24,7 @@ class IntConstraint extends FilterConstraint
      * @param int|null $maxValue
      * @param int|null $flags
      */
-    public function __construct(int $minValue = null, int $maxValue = null, int $flags = null)
+    public function __construct(?int $minValue = null, ?int $maxValue = null, ?int $flags = null)
     {
         $options = [];
         if (!is_null($minValue)) {

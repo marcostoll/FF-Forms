@@ -35,10 +35,10 @@ class UploadedFileConstraint extends AbstractConstraint
      *
      * If $validator is omitted php's build in is_uploaded_file() function is used instead.
      *
-     * @param callable $validator
+     * @param callable|null $validator
      * @see http://php.net/is_uploaded_file
      */
-    public function __construct(callable $validator = null)
+    public function __construct(?callable $validator = null)
     {
         if (is_null($validator)) {
             $validator = function (string $tmpFileName) {

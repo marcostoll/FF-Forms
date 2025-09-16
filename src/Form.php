@@ -344,7 +344,7 @@ class Form
      * @param string $method
      * @param array $args
      * @return AbstractField
-     * @throws ClassNotFoundException
+     * @throws \LogicException
      */
     public static function __callStatic(string $method, array $args)
     {
@@ -359,9 +359,7 @@ class Form
             $backTrace = debug_backtrace();
             $errorMsg = 'Call to undefined method ' . __CLASS__ . '::' . $method . '() '
                 . 'in ' . $backTrace[0]['file'] . ' on line ' . $backTrace[0]['line'];
-            trigger_error($errorMsg, E_USER_ERROR);
-
-            return null;
+            throw new \LogicException($errorMsg);
         }
     }
 
