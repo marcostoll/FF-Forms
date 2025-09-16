@@ -244,7 +244,7 @@ class AbstractFieldTest extends TestCase
      */
     public function testMagicCallUnknown()
     {
-        $this->expectException(Error::class);
+        $this->expectException(\LogicException::class);
 
         $this->uut->foo();
     }

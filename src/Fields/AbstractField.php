@@ -312,6 +312,7 @@ abstract class AbstractField
      * @param string $method
      * @param array $args
      * @return $this
+     * @throws \LogicException
      */
     public function __call($method, array $args)
     {
@@ -326,9 +327,7 @@ abstract class AbstractField
             $backTrace = debug_backtrace();
             $errorMsg = 'Call to undefined method ' . __CLASS__ . '::' . $method . '() '
                 . 'in ' . $backTrace[0]['file'] . ' on line ' . $backTrace[0]['line'];
-            trigger_error($errorMsg, E_USER_ERROR);
-
-            return $this;
+            throw new \LogicException($errorMsg);
         }
     }
 

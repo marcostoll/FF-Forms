@@ -35,10 +35,10 @@ class FileField extends AbstractField
      * If $uploadedValidator is omitted php's build in is_uploaded_file() function is used instead.
      *
      * @param string $name
-     * @param callable $uploadedValidator
+     * @param callable|null $uploadedValidator
      * @see http://php.net/is_uploaded_file
      */
-    public function __construct(string $name, callable $uploadedValidator = null)
+    public function __construct(string $name, ?callable $uploadedValidator = null)
     {
         $this->setName($name)
             ->addConstraint(new UploadedFileConstraint($uploadedValidator));

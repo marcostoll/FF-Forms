@@ -435,7 +435,7 @@ class FormTest extends TestCase
      */
     public function testMagicCallUnknown()
     {
-        $this->expectException(Error::class);
+        $this->expectException(\LogicException::class);
 
         Form::foo('bar');
     }
